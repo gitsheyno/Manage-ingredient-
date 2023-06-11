@@ -6,12 +6,12 @@ import "./IngredientForm.css";
 const IngredientForm = React.memo((props) => {
   const submitHandler = (event) => {
     event.preventDefault();
+    props.addIngredient({ title, amount });
     // ...
   };
 
-  const [inputs, setInputs] = useState({ title: "", amount: "" });
-  const [title, setTitle] = useState();
-  const [amount, setAmount] = useState();
+  const [title, setTitle] = useState("");
+  const [amount, setAmount] = useState("");
 
   return (
     <section className="ingredient-form">
@@ -24,6 +24,7 @@ const IngredientForm = React.memo((props) => {
               id="title"
               value={title}
               onChange={(e) => {
+                console.log(e.target.value);
                 setTitle(e.target.value);
               }}
             />
