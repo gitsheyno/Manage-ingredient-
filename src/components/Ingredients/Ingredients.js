@@ -43,7 +43,6 @@ function Ingredients() {
   return (
     <div className="App">
       <IngredientForm addIngredient={addIngredient} />
-
       <section>
         <Search />
         <IngredientList
