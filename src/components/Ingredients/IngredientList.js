@@ -27,7 +27,20 @@ const IngredientList = (props) => {
   return (
     <section className="ingredient-list">
       <h2>Loaded Ingredients</h2>
-      {data && (
+      {data &&
+        props.searched.length > 0 &&
+        Object.entries(data).map(([key, value]) => {
+          if (props.searched === value.title) {
+            return (
+              <li key={key} onClick={(e) => props.onRemoveGredient(key)}>
+                <span>{value.title}</span>
+                <span>{value.amount}x</span>
+              </li>
+            );
+          }
+          return null;
+        })}
+      {data && props.searched.length === 0 && (
         <ul>
           {Object.entries(data).map(([key, value]) => (
             <li key={key} onClick={(e) => props.onRemoveGredient(key)}>

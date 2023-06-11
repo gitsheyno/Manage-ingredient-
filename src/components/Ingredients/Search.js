@@ -1,15 +1,19 @@
-import React from 'react';
+import React from "react";
 
-import Card from '../UI/Card';
-import './Search.css';
+import Card from "../UI/Card";
+import "./Search.css";
 
-const Search = React.memo(props => {
+const Search = React.memo((props) => {
   return (
     <section className="search">
       <Card>
         <div className="search-input">
           <label>Filter by Title</label>
-          <input type="text" />
+          <input
+            type="text"
+            value={props.searched}
+            onChange={(e) => props.setSearched(e.target.value)}
+          />
         </div>
       </Card>
     </section>

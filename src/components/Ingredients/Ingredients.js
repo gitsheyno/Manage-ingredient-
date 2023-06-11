@@ -5,6 +5,8 @@ import Search from "./Search";
 import IngredientList from "./IngredientList";
 function Ingredients() {
   const [ingredient, setIngredient] = useState([]);
+  const [searched, setSearched] = useState("");
+
   const addIngredient = async (newIngredient) => {
     const response = await fetch(
       "https://ingredients-reactjs-default-rtdb.firebaseio.com/ingredients.json",
@@ -40,14 +42,19 @@ function Ingredients() {
   };
 
   console.log(ingredient);
+  console.log(searched);
   return (
     <div className="App">
       <IngredientForm addIngredient={addIngredient} />
       <section>
-        <Search />
-        <IngredientList
+        <Search
           ingredients={ingredient}
+          setSearched={setSearched}
+          searched={searched}
+        />
+        <IngredientList
           onRemoveGredient={onRemoveGredient}
+          searched={searched}
         />
       </section>
     </div>
