@@ -4,7 +4,9 @@ import "./IngredientList.css";
 
 const IngredientList = (props) => {
   const [data, setData] = useState([]);
+  // const temp = "shayan";
 
+  // console.log(temp.includes("sh"));
   useEffect(() => {
     const asyncFunc = async () => {
       const response = await fetch(
@@ -27,10 +29,11 @@ const IngredientList = (props) => {
   return (
     <section className="ingredient-list">
       <h2>Loaded Ingredients</h2>
+
       {data &&
         props.searched.length > 0 &&
         Object.entries(data).map(([key, value]) => {
-          if (props.searched === value.title) {
+          if (value.title.includes(props.searched)) {
             return (
               <li key={key} onClick={(e) => props.onRemoveGredient(key)}>
                 <span>{value.title}</span>
