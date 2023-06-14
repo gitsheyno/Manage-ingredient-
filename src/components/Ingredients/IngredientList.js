@@ -5,32 +5,32 @@ import "./IngredientList.css";
 const IngredientList = (props) => {
   const { ingredient } = props;
 
-  useEffect(() => {
-    const asyncFunc = async () => {
-      const response = await fetch(
-        "https://ingredients-reactjs-default-rtdb.firebaseio.com/ingredients.json"
-      );
-      if (!response.ok) {
-        throw new Error("somthing went wrong");
-      }
-      try {
-        const data = await response.json();
-        const updatedIngredients = Object.entries(data).map(([key, value]) => {
-          return {
-            id: key,
-            title: value.title,
-            amount: value.amount,
-          };
-        });
-        console.log(updatedIngredients);
-        props.setIngredient(updatedIngredients);
-      } catch (err) {
-        console.log(err.message);
-      }
-    };
+  // useEffect(() => {
+  //   const asyncFunc = async () => {
+  //     const response = await fetch(
+  //       "https://ingredients-reactjs-default-rtdb.firebaseio.com/ingredients.json"
+  //     );
+  //     if (!response.ok) {
+  //       throw new Error("somthing went wrong");
+  //     }
+  //     try {
+  //       const data = await response.json();
+  //       const updatedIngredients = Object.entries(data).map(([key, value]) => {
+  //         return {
+  //           id: key,
+  //           title: value.title,
+  //           amount: value.amount,
+  //         };
+  //       });
+  //       console.log(updatedIngredients);
+  //       props.setIngredient(updatedIngredients);
+  //     } catch (err) {
+  //       console.log(err.message);
+  //     }
+  //   };
 
-    asyncFunc();
-  }, []);
+  //   asyncFunc();
+  // }, []);
   const n = props.ingredient.map((ig) => console.log(ig.id));
   return (
     <section className="ingredient-list">
