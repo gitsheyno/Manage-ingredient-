@@ -3,10 +3,8 @@ import React, { useEffect, useState } from "react";
 import "./IngredientList.css";
 
 const IngredientList = (props) => {
-  const [data, setData] = useState([]);
-  // const temp = "shayan";
+  const { ingredient } = props;
 
-  // console.log(temp.includes("sh"));
   useEffect(() => {
     const asyncFunc = async () => {
       const response = await fetch(
@@ -17,38 +15,40 @@ const IngredientList = (props) => {
       }
       try {
         const data = await response.json();
-        setData(data);
+        const updatedIngredients = Object.entries(data).map(([key, value]) => {
+          return {
+            id: key,
+            title: value.title,
+            amount: value.amount,
+          };
+        });
+        console.log(updatedIngredients);
+        props.setIngredient(updatedIngredients);
       } catch (err) {
         console.log(err.message);
       }
     };
 
     asyncFunc();
-  }, [props]);
-
+  }, []);
+  const n = props.ingredient.map((ig) => console.log(ig.id));
   return (
     <section className="ingredient-list">
       <h2>Loaded Ingredients</h2>
 
-      {data &&
-        props.searched.length > 0 &&
-        Object.entries(data).map(([key, value]) => {
-          if (value.title.includes(props.searched)) {
-            return (
-              <li key={key} onClick={(e) => props.onRemoveGredient(key)}>
-                <span>{value.title}</span>
-                <span>{value.amount}x</span>
-              </li>
-            );
-          }
-          return null;
+      {props.ingredient &&
+        Object.entries(props.ingredient).map(([key, value]) => {
+          <li key={key} onClick={(e) => props.onRemoveGredient(key)}>
+            <span>{value.title}</span>
+            <span>{value.amount}x</span>
+          </li>;
         })}
-      {data && props.searched.length === 0 && (
+      {props.ingredient && (
         <ul>
-          {Object.entries(data).map(([key, value]) => (
-            <li key={key} onClick={(e) => props.onRemoveGredient(key)}>
-              <span>{value.title}</span>
-              <span>{value.amount}x</span>
+          {props.ingredient.map((ig) => (
+            <li key={ig.id} onClick={(e) => props.onRemoveGredient(ig.id)}>
+              <span>{ig.title}</span>
+              <span>{ig.amount}x</span>
             </li>
           ))}
         </ul>

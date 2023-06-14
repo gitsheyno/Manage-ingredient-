@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 
 import IngredientForm from "./IngredientForm";
 import Search from "./Search";
 import IngredientList from "./IngredientList";
 function Ingredients() {
   const [ingredient, setIngredient] = useState([]);
-  const [searched, setSearched] = useState("");
+
+  const onLoadINgredients = useCallback((newIngredients) => {
+    setIngredient(newIngredients);
+  }, []);
 
   const addIngredient = async (newIngredient) => {
     const response = await fetch(
@@ -38,23 +41,17 @@ function Ingredients() {
       return ig.id !== id;
     });
     setIngredient(updatedImgredients);
-    console.log(updatedImgredients);
   };
 
-  console.log(ingredient);
-  console.log(searched);
   return (
     <div className="App">
       <IngredientForm addIngredient={addIngredient} />
       <section>
-        <Search
-          ingredients={ingredient}
-          setSearched={setSearched}
-          searched={searched}
-        />
+        <Search onLoadINgredients={onLoadINgredients} />
         <IngredientList
+          ingredient={ingredient}
+          setIngredient={setIngredient}
           onRemoveGredient={onRemoveGredient}
-          searched={searched}
         />
       </section>
     </div>
