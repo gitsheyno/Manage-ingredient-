@@ -1,10 +1,13 @@
-import React from 'react';
+import React from "react";
 
-import Card from './UI/Card';
-import './Auth.css';
+import Card from "./UI/Card";
+import "./Auth.css";
 
-const Auth = props => {
-  const loginHandler = () => {};
+const Auth = (props) => {
+  const loginHandler = () => {
+    // console.log(props.Login);
+    props.Login();
+  };
 
   return (
     <div className="auth">

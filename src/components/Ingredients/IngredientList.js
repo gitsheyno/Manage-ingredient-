@@ -3,8 +3,6 @@ import React, { useEffect, useState } from "react";
 import "./IngredientList.css";
 
 const IngredientList = (props) => {
-  const { ingredient } = props;
-
   // useEffect(() => {
   //   const asyncFunc = async () => {
   //     const response = await fetch(
@@ -31,7 +29,7 @@ const IngredientList = (props) => {
 
   //   asyncFunc();
   // }, []);
-  const n = props.ingredient.map((ig) => console.log(ig.id));
+
   return (
     <section className="ingredient-list">
       <h2>Loaded Ingredients</h2>
